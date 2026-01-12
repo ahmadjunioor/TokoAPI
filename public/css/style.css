@@ -1,0 +1,174 @@
+/* Import Font 8-Bit "Press Start 2P" dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --mario-red: #E70012;
+    --luigi-green: #03AC13;
+    --sky-blue: #6B8CFF;
+    --brick-brown: #924419;
+    --coin-yellow: #FFD300;
+    --hard-shadow: 4px 4px 0px #000000;
+}
+
+body { 
+    background-color: var(--sky-blue); 
+    font-family: 'Press Start 2P', cursive; /* Font Pixel */
+    min-height: 100vh; 
+    color: #333;
+    /* Efek awan simple dengan CSS gradient */
+    background-image: 
+        radial-gradient(circle, white 10%, transparent 10%),
+        radial-gradient(circle, white 10%, transparent 10%);
+    background-size: 100px 100px;
+    background-position: 0 0, 50px 50px;
+}
+
+/* --- Tampilan KARTU (Login Box / Produk) --- */
+.card, .product-card, .invoice-card { 
+    border: 4px solid #000 !important; /* Garis tebal */
+    border-radius: 0 !important; /* Tidak boleh tumpul/rounded */
+    background: #fff; 
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.4) !important; /* Bayangan kotak */
+    transition: transform 0.1s;
+}
+
+.product-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 8px 12px 0px rgba(0,0,0,0.6) !important;
+}
+
+/* --- Tampilan INPUT --- */
+.form-control {
+    border: 3px solid #000;
+    border-radius: 0;
+    font-family: 'Courier New', Courier, monospace; /* Font input biar tetap terbaca */
+    font-weight: bold;
+    box-shadow: inset 4px 4px 0px #ddd;
+}
+
+.form-control:focus {
+    box-shadow: inset 4px 4px 0px #eee;
+    border-color: var(--mario-red);
+    outline: none;
+}
+
+/* --- TOMBOL UTAMA (Merah Mario) --- */
+.btn-primary {
+    background-color: var(--mario-red);
+    border: 3px solid #000;
+    border-radius: 0;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: var(--hard-shadow);
+    transition: all 0.1s;
+}
+
+.btn-primary:hover {
+    background-color: #bf000f;
+    transform: translate(2px, 2px); /* Efek tombol ditekan */
+    box-shadow: 2px 2px 0px #000;
+    border-color: #000;
+}
+
+.btn-primary:disabled {
+    background-color: #555;
+    border-color: #000;
+    color: #ccc;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: var(--mario-red) !important;
+    border-bottom: 4px solid #000;
+    box-shadow: 0px 4px 0px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+    color: #fff !important;
+    text-shadow: 2px 2px #000;
+}
+
+/* --- TEXT --- */
+h3, h4, h5 {
+    line-height: 1.5;
+    text-shadow: 2px 2px 0px #ddd;
+}
+
+.price-tag { 
+    font-size: 0.9rem; /* Kecilin dikit karena font pixel lebar */
+    color: var(--luigi-green); 
+    text-shadow: 1px 1px 0px #000;
+}
+
+/* --- LOGIN PAGE SPECIFIC --- */
+#login-wrapper { 
+    height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    /* Hiasan Lantai Bata Mario di bawah */
+    border-bottom: 20px solid var(--brick-brown);
+}
+
+/* ========================================= */
+/* CUSTOM POPUP STYLE (SweetAlert2)     */
+/* ========================================= */
+
+/* Kotak Popup Utama */
+div:where(.swal2-container) div:where(.swal2-popup) {
+    background-color: #000 !important; /* Background Hitam Retro */
+    border: 4px solid #fff !important; /* Border Putih Tebal */
+    border-radius: 0 !important; /* Kotak Tegas */
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.5) !important;
+    color: #fff !important;
+    font-family: 'Press Start 2P', cursive !important;
+    padding: 2rem !important;
+}
+
+/* Judul Popup */
+div:where(.swal2-title) {
+    color: #FFD300 !important; /* Kuning Koin */
+    text-shadow: 2px 2px #333;
+    font-size: 1.2rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Isi Teks Popup */
+div:where(.swal2-html-container) {
+    color: #ddd !important;
+    font-size: 0.8rem !important;
+    line-height: 1.6;
+}
+
+/* Ikon (Centang/Silang) */
+div:where(.swal2-icon) {
+    border-color: #fff !important;
+    color: #fff !important;
+}
+div:where(.swal2-icon).swal2-success {
+    border-color: var(--luigi-green) !important;
+    color: var(--luigi-green) !important;
+}
+div:where(.swal2-icon).swal2-error {
+    border-color: var(--mario-red) !important;
+    color: var(--mario-red) !important;
+}
+
+/* Tombol OK/Confirm di Popup */
+div:where(.swal2-container) button.swal2-styled.swal2-confirm {
+    background-color: var(--mario-red) !important;
+    border: 2px solid #fff !important;
+    border-radius: 0 !important;
+    box-shadow: 4px 4px 0px #333 !important;
+    color: #fff !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase;
+    padding: 10px 20px !important;
+}
+
+/* Efek Hover Tombol Popup */
+div:where(.swal2-container) button.swal2-styled.swal2-confirm:hover {
+    background-color: #bf000f !important;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #333 !important;
+}

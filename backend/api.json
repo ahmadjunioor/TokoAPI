@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TokoAPI Advanced System",
+    "description": "API E-commerce dengan Manajemen Stok, Kategori, dan Pencarian Dinamis.",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/api/products": {
+      "get": {
+        "summary": "Cari & Filter Produk (Advanced)",
+        "description": "Mengambil data produk dengan opsi filter nama dan kategori. Mendukung JOIN table.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Cari nama produk (Contoh: Laptop)"
+          },
+          {
+            "in": "query",
+            "name": "category_id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filter ID Kategori (1=Elektronik, 2=Furniture, dst)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Berhasil mengambil data"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Tambah Produk ke Inventaris (Admin)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "example": "Smart TV 4K"
+                  },
+                  "harga": {
+                    "type": "integer",
+                    "example": 5000000
+                  },
+                  "stok": {
+                    "type": "integer",
+                    "example": 50,
+                    "description": "Jumlah stok awal"
+                  },
+                  "category_id": {
+                    "type": "integer",
+                    "example": 1,
+                    "description": "1=Elektronik, 2=Furniture, 3=Aksesoris"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produk Berhasil Disimpan"
+          }
+        }
+      }
+    },
+    "/api/transaction": {
+      "post": {
+        "summary": "Transaksi & Pengurangan Stok Otomatis",
+        "description": "Sistem akan mengecek ketersediaan stok sebelum memproses transaksi.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaksi Sukses (Stok Berkurang)"
+          },
+          "400": {
+            "description": "Gagal (Stok Habis / Invalid)"
+          }
+        }
+      }
+    }
+  }
+}
